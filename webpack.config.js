@@ -38,8 +38,13 @@ module.exports = {
       exposes: {
         './CriptoNews': './src/App.js',
       },
-      shared: ['react'],
+      shared: {
+        ...deps,
+        react: {
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+      },
     }),
   ],
-
 };

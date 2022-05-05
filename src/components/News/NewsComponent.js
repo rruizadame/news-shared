@@ -6,17 +6,19 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import '../../styles/Components.css';
 
-
 const NewsContainer = ({ items, apiKeyNumber }) => {
   const [news, setNews] = useState(null);
 
   useEffect(() => {
+    console.log(78);
     retrieveNews();
   }, []);
 
-  const retrieveNews = () => {
-    const auxNews =  getNews(items, apiKeyNumber);
-    setNews([auxNews[0]]);
+  const retrieveNews = async () => {
+    const auxNews = await getNews(items, apiKeyNumber);
+
+    console.log(auxNews.data[0]);
+    setNews([auxNews.data[0]]);
   };
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -32,13 +34,13 @@ const NewsContainer = ({ items, apiKeyNumber }) => {
       <Grid container width="100%" className="mainContainer" spacing={2}>
         {news &&
           news.map((item) => (
-            <Box key={item.urlToImage}>
+            <Box style={{display:"flex"}} key={item.image}>
               <Grid item xs={12} sm={12} md={4} lg={4} xl={4} style={{ minWidth: '10rem' }}>
                 <Link target="_blank" href={item.url}>
-			Image test
+                  <img className="imgResponsive" src={`${item.image}`} srcSet={`${item.image}`} alt={item.title} loading="lazy  " />
                 </Link>
               </Grid>
-              <Grid item xs={12} sm={12} md={8} lg={8} xl={8} >
+              <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
                 <Grid item xs={12} style={{ marginBottom: '2rem' }}>
                   <Link target="_blank" underline="none" href={item.url}>
                     <Typography variant="h5" color="#1565c0" component="div" gutterBottom>
@@ -48,7 +50,7 @@ const NewsContainer = ({ items, apiKeyNumber }) => {
                 </Grid>
                 <Grid item xs={12}>
                   <Typography variant="subtitle1" className={'newsContentText'} component="div" gutterBottom>
-                    {item.content}
+                    {item.description}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} className={'newsFooter'}>
@@ -63,7 +65,7 @@ const NewsContainer = ({ items, apiKeyNumber }) => {
                   </Grid>
                   <Grid item style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }} xs={12} sm={12} md={6} xl={4}>
                     <Typography variant="caption" component="div" gutterBottom>
-                      {moment(new Date(item.publishedAt)).format('MMMM Do YYYY, h:mm:ss a')}
+                      {moment(new Date(item.published_at)).format('MMMM Do YYYY, h:mm:ss a')}
                     </Typography>
                   </Grid>
                 </Grid>

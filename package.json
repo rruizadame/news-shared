@@ -1,16 +1,16 @@
 {
   "name": "micro-frontend",
-
   "version": "1.0.0",
   "description": "\"Micro Frontend Template\"",
   "main": "index.js",
   "scripts": {
     "dev": "npx webpack serve",
+    "start": "webpack serve",
     "build": "webpack --mode production"
   },
-"engines": {
-	    "node": "17.x"
-	      },
+  "engines": {
+    "node": "17.x"
+  },
   "keywords": [
     "micro",
     "frontend"
