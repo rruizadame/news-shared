@@ -34,7 +34,7 @@ const NewsContainer = ({ items, apiKeyNumber }) => {
       <Grid container width="100%" className="mainContainer" spacing={2}>
         {news &&
           news.map((item) => (
-            <Box style={{display:"flex"}} key={item.image}>
+            <React.Fragment key={item.url}>
               <Grid item xs={12} sm={12} md={4} lg={4} xl={4} style={{ minWidth: '10rem' }}>
                 <Link target="_blank" href={item.url}>
                   <img className="imgResponsive" src={`${item.image}`} srcSet={`${item.image}`} alt={item.title} loading="lazy  " />
@@ -70,7 +70,7 @@ const NewsContainer = ({ items, apiKeyNumber }) => {
                   </Grid>
                 </Grid>
               </Grid>
-            </Box>
+            </React.Fragment>
           ))}
       </Grid>
     </Box>
